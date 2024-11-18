@@ -48,7 +48,7 @@ export class VsCodeMessenger {
       message: Message<FromWebviewProtocol[T][0]>,
     ) => Promise<FromWebviewProtocol[T][1]> | FromWebviewProtocol[T][1],
   ): void {
-    void this.webviewProtocol.on(messageType, handler);
+    this.webviewProtocol.on(messageType, handler);
   }
 
   onCore<T extends keyof ToIdeOrWebviewFromCoreProtocol>(
@@ -153,15 +153,16 @@ export class VsCodeMessenger {
     });
 
     webviewProtocol.on("acceptDiff", async ({ data: { filepath } }) => {
-      void vscode.commands.executeCommand("continue.acceptDiff", filepath);
+      await vscode.commands.executeCommand("continue.acceptDiff", filepath);
     });
 
     webviewProtocol.on("rejectDiff", async ({ data: { filepath } }) => {
-      void vscode.commands.executeCommand("continue.rejectDiff", filepath);
+      await vscode.commands.executeCommand("continue.rejectDiff", filepath);
     });
 
     this.onWebview("applyToFile", async ({ data }) => {
       let filepath = data.filepath;
+      const model = data.usedModelTitle;
 
       // If there is a filepath, verify it exists and then open the file
       if (filepath) {
@@ -178,7 +179,7 @@ export class VsCodeMessenger {
           await this.ide.writeFile(fullPath, data.text);
           await this.ide.openFile(fullPath);
 
-          void webviewProtocol.request("updateApplyState", {
+          await webviewProtocol.request("updateApplyState", {
             streamId: data.streamId,
             status: "done",
             numDiffs: 0,
@@ -199,11 +200,11 @@ export class VsCodeMessenger {
       }
 
       // If document is empty, insert at 0,0 and finish
-      if (!editor.document.getText().trim()) {
+      if (!editor.document.getText().trim() || model === 'Custom Http Service') {
         editor.edit((builder) =>
-          builder.insert(new vscode.Position(0, 0), data.text),
+          builder.insert(new vscode.Position(editor.document.lineCount, 0), data.text),
         );
-        void webviewProtocol.request("updateApplyState", {
+        await webviewProtocol.request("updateApplyState", {
           streamId: data.streamId,
           status: "done",
           numDiffs: 0,
@@ -328,7 +329,7 @@ export class VsCodeMessenger {
         ),
       );
 
-      void this.webviewProtocol.request("setEditStatus", {
+      this.webviewProtocol.request("setEditStatus", {
         status: "accepting",
         fileAfterEdit,
       });
