@@ -1,65 +1,35 @@
-<div align="center">
+Continue for Lean Copilot
+==========================================================
 
-![Continue logo](media/readme.png)
+Continue for Lean Copilot aims to integrate Lean Copilot's functionalities (suggest_tactics, search_proof, select_premises) with Continue. Make the Lean Copilot user experience more friendly and seamless. 
 
-</div>
 
-<h1 align="center">Continue</h1>
+# Lean Copilot HTTP Service
+This project first requires you to run a server for providing Lean Copilot http service. 
+## Steps
+1. Clone Lean Copilot at https://github.com/lean-dojo/LeanCopilot.
 
-<div align="center">
+2. Go to python folder at https://github.com/lean-dojo/LeanCopilot/tree/main/python and follow the readme file (https://github.com/lean-dojo/LeanCopilot/blob/main/python/README.md) to finish the stepup steps of requirements and then run the server.
+3. Finally, you will get an address for your http service, like http://127.0.0.1:23337
 
-**[Continue](https://docs.continue.dev) is the leading open-source AI code assistant. You can connect any models and any context to build custom autocomplete and chat experiences inside [VS Code](https://marketplace.visualstudio.com/items?itemName=Continue.continue) and [JetBrains](https://plugins.jetbrains.com/plugin/22707-continue-extension)**
 
-</div>
+# Continue Extension for VS Code
+With the running lean copilot service, you can then use Continue to interact with Lean Copilot.
+## Requirements
+* Download and install VS Code.
+* Install NVM at https://github.com/nvm-sh/nvm?tab=readme-ov-file.
+## Steps
+1. Run the below script in this project to install necessary dependencies:
+```bash
+bash scripts/install-dependencies.sh
+```
+2. Open this project with VS Code, and then click the following file:
+  ```bash
+  extensions/vscode/src/extension.ts
+  ```
 
-<div align="center">
+3. Use F5 in keyborad to debug the project.
+4. In left bar of Continue, Select Add Chat model and enter the address of your Lean Copilot HTTP Service, like http://127.0.0.1:23337/generate. Note that here you need to add /generate after your address to get the generation service.
+<img width="977" alt="Add Chat model" src="https://github.com/Guanyu-Lin/LeanCopilot_Continue/media/add_model.jpg">
 
-<a target="_blank" href="https://opensource.org/licenses/Apache-2.0" style="background:none">
-    <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" style="height: 22px;" />
-</a>
-<a target="_blank" href="https://docs.continue.dev" style="background:none">
-    <img src="https://img.shields.io/badge/continue_docs-%23BE1B55" style="height: 22px;" />
-</a>
-<a target="_blank" href="https://discord.gg/vapESyrFmJ" style="background:none">
-    <img src="https://img.shields.io/badge/discord-join-continue.svg?labelColor=191937&color=6F6FF7&logo=discord" style="height: 22px;" />
-</a>
-
-<p></p>
-
-## Chat
-
-[Chat](https://continue.dev/docs/chat/how-to-use-it) makes it easy to ask for help from an LLM without needing to leave the IDE
-
-![chat](docs/static/img/chat.gif)
-
-## Autocomplete
-
-[Autocomplete](https://continue.dev/docs/autocomplete/how-to-use-it) provides inline code suggestions as you type
-
-![autocomplete](docs/static/img/autocomplete.gif)
-
-## Edit
-
-[Edit](https://continue.dev/docs/edit/how-to-use-it) is a convenient way to modify code without leaving your current file
-
-![edit](docs/static/img/edit.gif)
-
-## Actions
-
-[Actions](https://continue.dev/docs/actions/how-to-use-it) are shortcuts for common use cases.
-
-![actions](docs/static/img/actions.gif)
-
-</div>
-
-## Getting Started
-
-Learn about how to install and use Continue in the docs [here](https://continue.dev/docs/getting-started/install)
-
-## Contributing
-
-Check out the [contribution ideas board](https://github.com/orgs/continuedev/projects/2), read the [contributing guide](https://github.com/continuedev/continue/blob/main/CONTRIBUTING.md), and join [#contribute on Discord](https://discord.gg/vapESyrFmJ)
-
-## License
-
-[Apache 2.0 © 2023-2024 Continue Dev, Inc.](./LICENSE)
+5. Finally, you can enjoy the user friendly proof automation, e.g., suggesting tactics/premises and searching for proofs in Continue. 
