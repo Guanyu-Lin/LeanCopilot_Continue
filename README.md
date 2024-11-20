@@ -30,6 +30,5 @@ bash scripts/install-dependencies.sh
 
 3. Use F5 in keyborad to debug the project.
 4. In left bar of Continue, Select Add Chat model and enter the address of your Lean Copilot HTTP Service, like http://127.0.0.1:23337/generate. Note that here you need to add /generate after your address to get the generation service.
-<img width="977" alt="Add Chat model" src="https://github.com/Guanyu-Lin/LeanCopilot_Continue/media/add_model.jpg">
-
+![Add Chat model](media/add_model.jpg)
 5. Finally, you can enjoy the user friendly proof automation, e.g., suggesting tactics/premises and searching for proofs in Continue. 
