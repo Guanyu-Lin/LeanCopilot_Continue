@@ -2,6 +2,7 @@ Continue for Lean Copilot
 ==========================================================
 
 Continue for Lean Copilot aims to integrate Lean Copilot's functionalities (suggest_tactics, search_proof, select_premises) with Continue. Make the Lean Copilot user experience more friendly and seamless. 
+![Demo](media/demo.move)
 
 
 # Lean Copilot HTTP Service
